@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Symbol Recognition</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <form method="post">
+    <h2>Identify Symbol</h2>
+    {% if error %}
+      <div class="error-message">{{ error }}</div>
+    {% endif %}
+    <div class="symbol-options">
+      {% for symbol in symbols %}
+        <button type="submit" name="symbol" value="{{ symbol }}" class="symbol-btn">{{ symbol }}</button>
+      {% endfor %}
+    </div>
+  </form>
+</body>
+</html>

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="dashboard-box">
+    <h2>Authentication Successful</h2>
+    <div class="status-info">
+      <p><strong>Security Status:</strong> <span class="status-pass">PASSED</span></p>
+      <p><strong>Welcome,</strong> {{ username }}</p>
+    </div>
+    <a href="/" class="login-btn">Logout / Login Again</a>
+  </div>
+</body>
+</html>

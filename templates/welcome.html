@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Welcome</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="welcome-box">
+    <h2>Access Granted - Welcome!</h2>
+    <div class="user-details">
+      <p><strong>Username:</strong> {{ username }}</p>
+    </div>
+    <a href="/" class="login-btn">Logout / Login Again</a>
+  </div>
+</body>
+</html>

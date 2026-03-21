@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Security Question</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <form method="post">
+    <h2>Answer Security Question</h2>
+    {% if error %}
+      <div class="error-message">{{ error }}</div>
+    {% endif %}
+    <div class="security-box">
+      <p><strong>Question:</strong> {{ question }}</p>
+      <input name="answer" placeholder="Your Answer" required />
+      <button type="submit">Verify</button>
+    </div>
+  </form>
+</body>
+</html>

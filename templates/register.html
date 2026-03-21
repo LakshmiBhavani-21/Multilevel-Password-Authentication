@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Register</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <form method="post">
+    <h2>Register</h2>
+    {% if msg %}
+      <div class="success-message">{{ msg }}</div>
+    {% endif %}
+    <label>Username:</label>
+    <input name="username" placeholder="Username" required />
+    <label>Password:</label>
+    <input name="password" type="password" placeholder="Password" required />
+    <label>Security Q:</label>
+    <input name="security_q" placeholder="Security Question" required />
+    <label>Security A:</label>
+    <input name="security_a" placeholder="Security Answer" required />
+    <div class="symbol-options">
+      <span>Select your symbol:</span>
+      <button type="submit" name="symbol" value="🌟" class="symbol-btn">🌟</button>
+      <button type="submit" name="symbol" value="🔥" class="symbol-btn">🔥</button>
+      <button type="submit" name="symbol" value="🌈" class="symbol-btn">🌈</button>
+      <button type="submit" name="symbol" value="💧" class="symbol-btn">💧</button>
+    </div>
+    <!-- Main submit button for registration -->
+    <button type="submit">Register</button>
+    <!-- Add Login button below the registration form -->
+    <a href="/" class="login-btn">Get Login</a>
+  </form>
+</body>
+</html>

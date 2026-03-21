@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>OTP Verification</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+  <script>
+    var timer = 30;
+    function startTimer() {
+      var timerSpan = document.getElementById('timer');
+      var interval = setInterval(function() {
+        if (timer > 0) {
+          timer--;
+          timerSpan.textContent = timer;
+        } else {
+          clearInterval(interval);
+          document.getElementById('expiredMsg').style.display = 'block';
+          document.getElementById('otpInput').disabled = true;
+          document.getElementById('submitBtn').disabled = true;
+        }
+      }, 1000);
+    }
+    window.onload = startTimer;
+  </script>
+</head>
+<body>
+  <form method="post">
+    <h2>Enter OTP</h2>
+    {% if error %}
+      <div class="error-message">{{ error }}</div>
+    {% endif %}
+    <div>
+      <span class="otp-demo">Your OTP: <strong>{{ otp_code }}</strong></span>
+      <span class="otp-expiry"><br> Valid for <span id="timer">30</span> seconds</span>
+      <span id="expiredMsg" style="color:red; display:none;">OTP expired! Please login again.</span>
+    </div>
+    <input id="otpInput" name="otp" placeholder="Enter OTP" required />
+    <button id="submitBtn" type="submit">Verify OTP</button>
+  </form>
+</body>
+</html>

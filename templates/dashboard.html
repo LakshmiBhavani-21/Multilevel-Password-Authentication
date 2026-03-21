@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <!-- Fixed position: Top-Right corner SHOW FILES button -->
+  <button id="showFilesBtn"
+  class="available-files-btn"
+  style="position:fixed; top:120px; right:40px; z-index:1000;
+         font-size:22px; font-weight:bold;
+         width:430px; padding:18px 0;
+         border-radius:25px;
+         background:#322666e0; color:#fff;
+         box-shadow:0 8px 24px #0009;
+         border:none;">
+  Available Files
+</button>
+
+  <!-- Files list overlay, default hidden, shows below the button -->
+   <div id="filesListSection"
+  style="display:none; position:fixed; top:180px; right:40px; width:430px; min-width:430px;
+         background:#261c55e0; padding:30px 30px 20px 30px; border-radius:25px;
+         box-shadow:0 8px 24px #0009; z-index:1001;">
+
+    <h3 style="color:#fff; font-size:16px; margin-top:2px;">Choose a file:</h3>
+    <ul style="margin:0; padding:0; list-style:none;">
+      {% for file in files %}
+        <li style="margin-bottom: 10px; display:flex; align-items:center;">
+          <span style="color:#fff; font-weight:bold;">{{ file }}</span>
+          <a href="{{ url_for('download_file', filename=file) }}" target="_blank" style="margin-left:10px; color:#0af; text-decoration:underline;">Open</a>
+          <form action="{{ url_for('delete_file', filename=file) }}" method="POST" style="display:inline-block; margin-left:10px;">
+            <button type="submit" style="padding:3px 12px; font-size:13px;">delete</button>
+          </form>
+        </li>
+      {% else %}
+        <li style="color:#fff;">No files available</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- Welcome/auth box shifted Left -->
+  <div class="glass-box" style="position:absolute; top:50px; left:50px; width:730px;">
+    <h2>Welcome, {{ username }}!</h2>
+    <p><b>Authentication Successful!</b><br>Security Status: <b>PASSED</b></p>
+
+    <!-- File upload form -->
+    <form method="POST" enctype="multipart/form-data">
+      <input type="file" name="file" required>
+      <button type="submit">Upload</button>
+    </form>
+
+    <!-- Flash messages display -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <!-- Logout Button -->
+    <form action="{{ url_for('logout') }}" method="post">
+      <button type="submit" class="logout-btn">logout</button>
+    </form>
+  </div>
+
+  <!-- JS to toggle files list -->
+  <script>
+    document.getElementById("showFilesBtn").onclick = function() {
+      var section = document.getElementById("filesListSection");
+      if(section.style.display === "none") section.style.display = "block";
+      else section.style.display = "none";
+    };
+  </script>
+</body>
+</html>
